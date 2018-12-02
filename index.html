@@ -1,0 +1,87 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>〇✖ゲーム</title>
+    <link rel="stylesheet" 
+         type="text/css" 
+         href="style.css">
+
+<script>
+window.onload = function() {
+
+	var turn = '○';
+
+	function mark(e)
+	{
+		if (e.target.innerHTML == '') {
+			e.target.innerHTML = turn;
+			if (hantei()) {
+				alert(turn + ' WIN!!');
+				mouichido();
+			} else {
+				change_turn();
+			}
+		}
+	}
+
+	function hantei()
+	{
+		var tds = document.getElementById('a').getElementsByTagName('td');
+		if (tds[0].innerHTML != '' && tds[0].innerHTML == tds[1].innerHTML && tds[0].innerHTML == tds[2].innerHTML) {
+			return true;
+		} else if (tds[3].innerHTML != '' && tds[3].innerHTML == tds[4].innerHTML && tds[3].innerHTML == tds[5].innerHTML) {
+			return true;
+		} else if (tds[6].innerHTML != '' && tds[6].innerHTML == tds[7].innerHTML && tds[6].innerHTML == tds[8].innerHTML) {
+			return true;
+		} else if (tds[0].innerHTML != '' && tds[0].innerHTML == tds[3].innerHTML && tds[0].innerHTML == tds[6].innerHTML) {
+			return true;
+		} else if (tds[1].innerHTML != '' && tds[1].innerHTML == tds[4].innerHTML && tds[1].innerHTML == tds[7].innerHTML) {
+			return true;
+		} else if (tds[2].innerHTML != '' && tds[2].innerHTML == tds[5].innerHTML && tds[2].innerHTML == tds[8].innerHTML) {
+			return true;
+		} else if (tds[0].innerHTML != '' && tds[0].innerHTML == tds[4].innerHTML && tds[0].innerHTML == tds[8].innerHTML) {
+			return true;
+		} else if (tds[2].innerHTML != '' && tds[2].innerHTML == tds[4].innerHTML && tds[2].innerHTML == tds[6].innerHTML) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function mouichido()
+	{
+		var tds = document.getElementById('a').getElementsByTagName('td');
+		for (var i = 0; i < tds.length; ++i) {
+			tds[i].innerHTML = '';
+		}
+		turn = '○';
+	}
+
+	function change_turn()
+	{
+		if (turn == '○') {
+			turn = '×';
+		} else {
+			turn = '○';
+		}
+	}
+
+	var tds = document.getElementById('a').getElementsByTagName('td');
+	for (var i = 0; i < tds.length; ++i) {
+		tds[i].addEventListener('click', mark);
+	}
+
+}
+</script>
+</head>
+<body>
+	<table id="a" align="center" border="1">
+		<tbody>
+			<th colspan="3">〇✖ゲーム</th>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td></tr>
+		</tbody>
+	</table>
+</body>
+</html>
